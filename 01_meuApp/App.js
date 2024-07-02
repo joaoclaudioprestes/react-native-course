@@ -1,10 +1,24 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Button } from "react-native";
 
 class App extends Component {
-  render() {
-    const name = "iPhone 14 Pro Max";
+  constructor(props) {
+    super(props);
+    this.state = { nome: "Iphone 14 Pro Max" };
 
+    this.modificar = this.modificar.bind(this);
+    this.mudarNome = this.mudarNome.bind(this);
+  }
+
+  modificar() {
+    this.setState({ nome: "Iphone 15 Pro Max" });
+  }
+
+  mudarNome = (nome) => {
+    this.setState({ nome: nome });
+  };
+
+  render() {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Hello World!</Text>
@@ -12,8 +26,22 @@ class App extends Component {
           This is my first app using React Native!
         </Text>
         <Text style={styles.text}>Sujeito Programador</Text>
+        <Text style={styles.span}>Iphone</Text>
         <Product />
-        <Text style={styles.text}>Nome do Produto: {name}</Text>
+        <Text style={styles.text}>Nome do Produto: {this.state.nome}</Text>
+
+        <Button
+          title="Ver outro"
+          color={"#000"}
+          backgroundColor={"#fff"}
+          onPress={this.modificar}
+        />
+        <Button
+          title="Mudar"
+          color={"#000"}
+          backgroundColor={"#fff"}
+          onPress={() => this.mudarNome("Iphone 16 Pro Max")} // Arrow function -> vai mandar o nome quando clicar
+        />
       </View>
     );
   }
@@ -60,6 +88,20 @@ const styles = StyleSheet.create({
     height: 300,
     marginTop: 25,
     borderRadius: 10,
+    zIndex: 10,
+  },
+  span: {
+    backgroundColor: "#fff",
+    position: "relative",
+    top: 65,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 5,
+    right: 148,
+    zIndex: 20,
+  },
+  button: {
+    marginTop: 25,
   },
 });
 
